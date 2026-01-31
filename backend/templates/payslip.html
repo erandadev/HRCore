@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      @page {
+        size: A4;
+        margin: 0; /* We handle margins in the Puppeteer config instead */
+      }
+
+      body {
+        font-family: "Helvetica", sans-serif;
+        padding: 40px;
+        color: #000000;
+        font-size: 0.8em;
+        margin: 0 100px;
+      }
+      .header {
+        border-bottom: 2px solid #000000;
+        padding-bottom: 10px;
+        text-align: center;
+      }
+      .company-name {
+        font-size: 2em;
+        font-weight: bold;
+        /* color: #4a90e2; */
+        margin-bottom: 5px;
+      }
+      .payslip-title {
+        font-size: 1.2em;
+        color: #414141;
+      }
+      .grid {
+        margin-right: 100px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .bold-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 2px solid #333;
+        font-weight: 900;
+      }
+
+      .total {
+        /* background: #f9f9f9; */
+        font-weight: bold;
+        font-size: 1.1em;
+        border-bottom: 0;
+      }
+
+      .net-pay {
+        border-bottom: 2px solid #333;
+        border-top: 2px solid #333;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="company-name">{{ company }}</div>
+      <div class="payslip-title">
+        Payslip for the month of {{month}} {{ year }}
+      </div>
+    </div>
+
+    <!-- <div class="header">
+      <div class="company-name">Biseka Pvt Ltd</div>
+      <div class="payslip-title">Payslip for the month of January 2026</div>
+    </div> -->
+
+    <div class="grid">
+      <div>
+        <p><strong>Name:</strong> {{name}}</p>
+        <p><strong>Designation:</strong> {{ designation }}</p>
+        <p><strong>EPF Number:</strong> {{ epf_number }}</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 10px">
+      <div class="bold-row">
+        <span>CONSOLIDATED SALARY</span> <span>Rs. Cts.</span>
+      </div>
+
+      <div class="row">
+        <span>Basic Salary</span> <span>{{basic_pay}}</span>
+      </div>
+      <div class="row">
+        <span>Budgetary Relief Allowance 1</span>
+        <span>{{br_allowance_1}}</span>
+      </div>
+
+      <div class="row">
+        <span>Budgetary Relief Allowance 2</span>
+        <span>{{br_allowance_2}}</span>
+      </div>
+
+      <div class="row">
+        <span>Add: Travelling/Other Allowance</span>
+        <span>{{travelling_allowance}}</span>
+      </div>
+
+      <div class="row">
+        <span>Add: Attendance Allowance</span>
+        <span>{{attendance_allowance}}</span>
+      </div>
+
+      <div class="row">
+        <span>Add: COL Allowance</span>
+        <span>{{col_allowance}}</span>
+      </div>
+
+      <div class="row">
+        <span>Less: No Pay</span>
+        <span>{{no_pay}}</span>
+      </div>
+
+      <div class="row">
+        <span>Add: Commission</span>
+        <span>{{commision}}</span>
+      </div>
+
+      <div class="row">
+        <span>Add: Additional Commission</span>
+        <span>{{additional_commision}}</span>
+      </div>
+
+      <div class="row total">
+        <span>Gross Pay</span> <span>{{gross_pay}}</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 10px">
+      <div class="bold-row"><span>DEDUCTIONS</span> <span></span></div>
+
+      <div class="row"><span>E.P.F. 8%</span> <span>{{epf_8}}</span></div>
+
+      <div class="row">
+        <span>Salary Advanced & Others</span> <span>{{salary_advance}}</span>
+      </div>
+
+      <div class="row"><span>Staff Loan</span> <span>{{staff_loan}}</span></div>
+
+      <div class="row"><span>Stamp Duty</span> <span>{{stamp_duty}}</span></div>
+
+      <div class="row"><span>P. A. Y. E.</span> <span>{{payee_tax}}</span></div>
+
+      <div class="row total">
+        <span>Total Deductions</span> <span>{{total_deductions}}</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px">
+      <div class="row total net-pay">
+        <span>Net Pay</span> <span>{{ net_pay }}</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px">
+      <div class="bold-row">
+        <span>EMPLOYER CONTRIBUTION</span> <span></span>
+      </div>
+
+      <div class="row">
+        <span>EPF-Co. Contribution 12%</span> <span>{{epf_12}}</span>
+      </div>
+      <div class="row"><span>ETF 3%</span> <span>{{etf_3}}</span></div>
+    </div>
+
+    <p class="footer">
+      This is a computer generated payslip. No signature is required.
+    </p>
+  </body>
+</html>
