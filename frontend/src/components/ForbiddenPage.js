@@ -27,11 +27,11 @@ const ForbiddenPage = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
             className="flex items-center justify-center space-x-2 px-6 py-3 bg-white border border-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition shadow-sm"
           >
             <ArrowLeft size={18} />
-            <span>Go Back</span>
+            <span>Go to Dashboard</span>
           </button>
         </div>
 

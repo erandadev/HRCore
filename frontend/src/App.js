@@ -72,7 +72,7 @@ const App = () => {
           }),
         );
 
-        navigate("/dashboard");
+        navigate("/");
       } else {
         setError(data.message);
       }
@@ -180,7 +180,7 @@ const App = () => {
           <SidebarItem
             icon={<Clock size={20} />}
             label="Dashboard"
-            redirectTo="/dashboard"
+            redirectTo="/"
           />
 
           {/* Other nav items... */}
@@ -197,7 +197,7 @@ const App = () => {
 
       <Routes>
         <Route
-          path="/dashboard"
+          path="/"
           element={
             <ProtectedRoute>
               <Dashboard />

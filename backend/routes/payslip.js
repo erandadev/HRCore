@@ -76,12 +76,12 @@ router.post("/", auth("user"), async (req, res) => {
     // Make PDF
     const browser = await puppeteer.launch({
       headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage", // Helps with memory limits on free tiers
-        "--single-process",
-      ],
+      // args: [
+      //   "--no-sandbox",
+      //   "--disable-setuid-sandbox",
+      //   "--disable-dev-shm-usage", // Helps with memory limits on free tiers
+      //   "--single-process",
+      // ],
     });
     const page = await browser.newPage();
 

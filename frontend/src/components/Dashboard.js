@@ -25,7 +25,8 @@ const Dashboard = () => {
       <header className="flex justify-between items-center mb-8">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">
-            Welcome Back, {user.username}
+            Welcome Back,{" "}
+            <span style={{ textTransform: "capitalize" }}>{user.username}</span>
           </h2>
           <p className="text-gray-500">Hi! How are you?</p>
         </div>
