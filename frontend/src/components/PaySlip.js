@@ -95,7 +95,7 @@ const PaySlip = () => {
   };
 
   return (
-    <div className="flex-1 p-8 overflow-y-auto">
+    <div className="flex-1 p-8 overflow-y-auto" style={{ marginTop: "25px" }}>
       <header className="mb-8">
         <h2 className="text-2xl font-bold text-gray-800">Generate Payslip</h2>
         <p className="text-gray-500">

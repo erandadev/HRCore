@@ -21,7 +21,7 @@ const QuickAction = ({ title, description, icon: Icon }) => (
 const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   return (
-    <main className="flex-1 p-8 overflow-y-auto">
+    <main className="flex-1 p-8 overflow-y-auto" style={{ marginTop: "25px" }}>
       <header className="flex justify-between items-center mb-8">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">

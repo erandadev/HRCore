@@ -10,7 +10,7 @@ import SidebarItem from "./utils/SideBarItem";
 import { useNavigate } from "react-router-dom";
 import ForbiddenPage from "./components/ForbiddenPage";
 
-import { Lock, User, InfoIcon, Clock, LogOut } from "lucide-react";
+import { Lock, User, InfoIcon, Clock, LogOut, MenuIcon, X } from "lucide-react";
 
 import api from "./utils/api";
 
@@ -25,6 +25,13 @@ const App = () => {
     username: "",
     password: "",
   });
+
+  let [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuButtonClick = () => {
+    console.log(isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleChange = (e) => {
     setError("");
@@ -170,7 +177,13 @@ const App = () => {
   return (
     <div className="flex min-h-screen bg-gray-100 font-sans">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 text-white hidden md:flex flex-col">
+      <aside
+        className={
+          isMenuOpen
+            ? "w-64 bg-slate-900 text-white md:flex flex-col"
+            : "w-64 bg-slate-900 text-white hidden  md:flex flex-col"
+        }
+      >
         <div className="p-6">
           <h1 className="text-2xl font-bold tracking-tight text-blue-400">
             HRCore
@@ -194,6 +207,16 @@ const App = () => {
           </button>
         </div>
       </aside>
+
+      <div
+        className={
+          isMenuOpen ? "md:hidden m-5" : "fixed top-5 left-5 md:hidden"
+        }
+        onClick={handleMenuButtonClick}
+        style={{ cursor: "pointer" }}
+      >
+        {isMenuOpen ? <X /> : <MenuIcon />}
+      </div>
 
       <Routes>
         <Route
