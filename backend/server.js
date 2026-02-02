@@ -1,10 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-const payslipRoute = require("./routes/payslip");
-const authRoute = require("./routes/auth");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
-const cookieParser = require("cookie-parser");
+const payslipRoute = require("./routes/payslip");
+const authRoute = require("./routes/auth");
 
 const app = express();
 

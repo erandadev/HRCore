@@ -1,38 +1,34 @@
 import { useState } from "react";
-
 import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Lock, User, InfoIcon, Clock, LogOut, MenuIcon, X } from "lucide-react";
 
+import api from "./utils/api";
 import Dashboard from "./components/Dashboard";
 import PaySlip from "./components/PaySlip";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import SidebarItem from "./utils/SideBarItem";
-
-import { useNavigate } from "react-router-dom";
 import ForbiddenPage from "./components/ForbiddenPage";
-
-import { Lock, User, InfoIcon, Clock, LogOut, MenuIcon, X } from "lucide-react";
-
-import api from "./utils/api";
 
 const App = () => {
   const navigate = useNavigate();
-
-  let [error, setError] = useState("");
-
   const user = localStorage.getItem("user");
 
+  // State
+  let [error, setError] = useState("");
+  let [isMenuOpen, setIsMenuOpen] = useState(false);
   let [userInputData, setUserInputData] = useState({
     username: "",
     password: "",
   });
 
-  let [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  // Menu button for mobile devices
   const handleMenuButtonClick = () => {
     console.log(isMenuOpen);
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Update state acording to the user input - User input handler
   const handleChange = (e) => {
     setError("");
     setUserInputData({
@@ -41,6 +37,7 @@ const App = () => {
     });
   };
 
+  // Logout Handler - Run when user click the logout button
   const handleLogout = async () => {
     const logoutStatus = await api.get("/api/auth/logout");
 
@@ -50,7 +47,7 @@ const App = () => {
     }
   };
 
-  // Login handler
+  // Run when user click the sign in button - Login handler
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -90,6 +87,7 @@ const App = () => {
     }
   };
 
+  // If user not loged in user will see the login page
   if (!user) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
@@ -153,15 +151,15 @@ const App = () => {
 
             {error !== "" ? (
               <div
-                class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+                className="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
                 role="alert"
               >
-                <div class="flex">
-                  <div class="py-1" style={{ marginRight: 15 }}>
+                <div className="flex">
+                  <div className="py-1" style={{ marginRight: 15 }}>
                     <InfoIcon />
                   </div>
                   <div>
-                    <p class="font-bold">{error}</p>
+                    <p className="font-bold">{error}</p>
                   </div>
                 </div>
               </div>
@@ -174,6 +172,7 @@ const App = () => {
     );
   }
 
+  // If user loged in user will see the dashboard and other protected routes
   return (
     <div className="flex min-h-screen bg-gray-100 font-sans">
       {/* Sidebar */}
@@ -195,8 +194,6 @@ const App = () => {
             label="Dashboard"
             redirectTo="/"
           />
-
-          {/* Other nav items... */}
         </nav>
         <div className="p-4 border-t border-slate-800 text-gray-400">
           <button

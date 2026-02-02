@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { Search, Download } from "lucide-react";
 
 import api from "../utils/api";
@@ -10,13 +9,12 @@ const PaySlip = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
+  // Component State
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("2026");
-
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
   const [downloadLink, setDownloadLink] = useState("");
 
   const months = [
@@ -35,8 +33,9 @@ const PaySlip = () => {
   ];
   const years = ["2025", "2026"];
 
+  // Functions for give user a downloadable from the Blob data comming from the Backend
+  // Create a temporary link and click it
   const handleDownloadButton = () => {
-    // Create a temporary link and click it
     const link = document.createElement("a");
     link.href = downloadLink;
     link.setAttribute(
@@ -172,13 +171,13 @@ const PaySlip = () => {
       )}
 
       {isLoading && (
-        <div class="border border-gray-300 shadow rounded-md p-4 w-full mx-auto">
-          <div class="animate-pulse flex space-x-4">
-            <div class="flex-1 space-y-4 py-1">
-              <div class="h-4 bg-gray-400 rounded w-3/4"></div>
-              <div class="space-y-2">
-                <div class="h-4 bg-gray-400 rounded"></div>
-                <div class="h-4 bg-gray-400 rounded w-5/6"></div>
+        <div className="border border-gray-300 shadow rounded-md p-4 w-full mx-auto">
+          <div className="animate-pulse flex space-x-4">
+            <div className="flex-1 space-y-4 py-1">
+              <div className="h-4 bg-gray-400 rounded w-3/4"></div>
+              <div className="space-y-2">
+                <div className="h-4 bg-gray-400 rounded"></div>
+                <div className="h-4 bg-gray-400 rounded w-5/6"></div>
               </div>
             </div>
           </div>

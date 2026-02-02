@@ -13,11 +13,7 @@ const authorize = (requiredRole) => {
       req.user = decoded;
 
       // Role Check
-      if (
-        requiredRole &&
-        req.user.role !== requiredRole &&
-        req.user.role !== "admin"
-      ) {
+      if (requiredRole && req.user.role !== requiredRole) {
         return res
           .status(403)
           .json({ message: "Forbidden: You don't have access to this" });

@@ -45,10 +45,6 @@ router.post("/login", async (req, res) => {
         .json({ status: "ERROR", message: "Invalid credentials" });
     }
 
-    // const user = await db.get("SELECT * FROM users WHERE username = ?", [
-    //   username,
-    // ]);
-
     const result = await db.query("SELECT * FROM users WHERE username = $1", [
       username,
     ]);
@@ -97,12 +93,15 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// @route api/auth/logout
+// @desc  User logout
+// @Access Public
 router.get("/logout", (req, res) => {
-  // res.clearCookie("token", {
-  //   httpOnly: true,
-  //   secure: false /* TODO make SECURE True in production */,
-  //   sameSite: "lax",
-  // });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true /* TODO make SECURE True in production */,
+    sameSite: "lax",
+  });
 
   return res
     .status(200)
