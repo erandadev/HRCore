@@ -88,14 +88,13 @@ const App = () => {
   };
 
   // If user not loged in user will see the login page
+  // if (false) {
   if (!user) {
     return (
       <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
           <div className="bg-blue-600 p-8 text-center">
-            <h1 className="text-3xl font-bold text-white tracking-tight">
-              HRCore
-            </h1>
+            <h1 className="text-3xl font-bold text-white">HRCore</h1>
             <p className="text-blue-100 mt-2">Management System Portal</p>
           </div>
 

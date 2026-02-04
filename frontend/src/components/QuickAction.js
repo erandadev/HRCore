@@ -1,3 +1,5 @@
+import { ChevronRight } from "lucide-react";
+
 // Reuseable Component for make quick actions on dashboard
 const QuickAction = ({ title, description, icon: Icon }) => (
   <button className="flex items-center justify-between w-full p-4 bg-gray-50 hover:bg-blue-50 transition-colors rounded-lg group">
