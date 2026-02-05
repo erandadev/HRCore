@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Lock, User, InfoIcon, Clock, LogOut, MenuIcon, X } from "lucide-react";
+import {
+  Lock,
+  User,
+  InfoIcon,
+  Clock,
+  LogOut,
+  MenuIcon,
+  X,
+  Loader,
+} from "lucide-react";
 
 import api from "./utils/api";
 import Dashboard from "./components/Dashboard";
@@ -21,6 +30,8 @@ const App = () => {
     username: "",
     password: "",
   });
+
+  let [isLoading, setIsLoading] = useState(false);
 
   // Menu button for mobile devices
   const handleMenuButtonClick = () => {
@@ -59,6 +70,7 @@ const App = () => {
       setError("All fields are required");
     }
 
+    setIsLoading(true);
     try {
       const response = await api.post("/api/auth/login", {
         username,
@@ -76,13 +88,16 @@ const App = () => {
           }),
         );
 
+        setIsLoading(false);
         navigate("/");
       } else {
         setError(data.message);
+        setIsLoading(false);
       }
     } catch (err) {
       localStorage.clear();
       setError(err.response?.data?.message);
+      setIsLoading(false);
       console.error("Login failed");
     }
   };
@@ -141,12 +156,24 @@ const App = () => {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Sign In
-            </button>
+            {!isLoading ? (
+              <button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Sign In
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="flex justify-center w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98] opacity-60"
+              >
+                <div className="mr-5">
+                  <Loader className="animate-spin h-6 w-6 text-white" />
+                </div>
+                <div>Sign In....</div>
+              </button>
+            )}
 
             {error !== "" ? (
               <div
